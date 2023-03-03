@@ -7,17 +7,16 @@ function Global = globalDataFcn()
       Global.P = 1.01325;             % Pressure                      [bar]   
       Global.Tbed    = (623 + 273.15);% Temperature                     [K]
       Global.g       = 981.0;         % Gravity                     [cm/s2]
-      Global.Num_esp = 18;            % number of species               [#]
+      Global.Num_esp_1 = 18;          % number of species               [#]
+      Global.Num_esp_2 = 9;           % number of species               [#]
       Global.gen     = 6;             % gas species number              [#]
       Global.sen     = 3;             % solid species number            [#]
       Global.iterations = Iterations.getInstance();% number of iterations
-      Global.n       = 50;            % mesh points number              [#] 
+      Global.n1      = 40;            % mesh points number              [#] 
+      Global.n2      = 60;            % mesh points number              [#]
 % ----------| Flow rate and concentration of species |---------------------
 % ----- total feed flow in the reactor's bottom ---------------------------
-      %  Global.QT_in = 1200;           %  condicion_1         [STP ml/min]
-      %  Global.QT_in = (pi*(4.6/2)^2)*4*60; % condicion_2     [STP ml/min]
-      %  Global.QT_in = (pi*(4.6/2)^2)*3.4*60; % condicion_3   [STP ml/min]
-         Global.QT_in = (pi*(4.6/2)^2)*3.3*60; % condicion_4   [STP ml/min]
+      Global.QT_in = 1200;            %  condicion_1           [STP ml/min]
 % ----- flow feed ratio for each specie -----------------------------------
       CH4in_rat = 50.0;               % CH4                             [%]
       N2in_rat  = 50.0;               % N2                              [%]
@@ -29,7 +28,8 @@ function Global = globalDataFcn()
       Global.N2in  = ( FN2in*60/Global.QT_in); %                  [mol/cm3]
 
       if (Global.QT_in == 0) 
-            Global.CH4in = 0;  Global.N2in = 0;  
+          Global.CH4in =  0;  
+          Global.N2in  =  0;  
       end
 % -------------------------------------------------------------------------  
 % ---------- reactor constant data  ---------------------------------------
@@ -37,9 +37,12 @@ function Global = globalDataFcn()
       Global.reactor.bHeight = 23; % bed height                        [cm]
       Global.reactor.rHeight = 94; % reactor height                    [cm]
       Global.reactor.rArea   = pi*(Global.reactor.rID/2)^2; % area    [cm2]
-      Global.reactor.zg      = linspace(0,                      ...
+      Global.reactor.z1      = linspace(0,                       ...
                                     Global.reactor.bHeight,      ...
                                     Global.n)'; % mesh                 [cm]
+      Global.reactor.z2      = linspace(Global.reactor.bHeight,  ...
+                                        Global.reactor.rHeight,  ...
+                                        Global.n2)'; % mesh2           [cm]
 % ---------- fluid Dynamics -----------------------------------------------
       Global.fDynamics.usg0 = Global.QT_in./...
                               (Global.reactor.rArea*60.0); 
@@ -53,7 +56,7 @@ function Global = globalDataFcn()
 % ---------- Carrier Data -------------------------------------------------
       Global.carrier.R       = 8.314472;  % Universal Gas Constant [J/molK] 
       Global.carrier.a0      = 1020000;   % specific surface area   [cm2/g]
-      Global.carrier.C_NiO_o = 0.05;      % NiO concentration    [gNiO/g-c]
+      Global.carrier.C_NiO_o = 0.08;      % NiO concentration    [gNiO/g-c]
       Global.carrier.load    = 300;   % catalyst weight                 [g]
       Global.carrier.dp          = 0.014; % particle diameter          [cm]
       Global.carrier.bulkDensity = 1.1;   % particle density        [g/cm3]
