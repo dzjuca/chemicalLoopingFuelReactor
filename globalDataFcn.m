@@ -34,12 +34,13 @@ function Global = globalDataFcn()
 % -------------------------------------------------------------------------  
 % ---------- reactor constant data  ---------------------------------------
       Global.reactor.rID     = 4.6;% internal diameter of the reactor  [cm]
+      Global.reactor.rID_2   = 7.0;% internal diameter of the reactor  [cm]
       Global.reactor.bHeight = 23; % bed height                        [cm]
       Global.reactor.rHeight = 94; % reactor height                    [cm]
       Global.reactor.rArea   = pi*(Global.reactor.rID/2)^2; % area    [cm2]
       Global.reactor.z1      = linspace(0,                       ...
                                     Global.reactor.bHeight,      ...
-                                    Global.n)'; % mesh                 [cm]
+                                    Global.n1)'; % mesh                [cm]
       Global.reactor.z2      = linspace(Global.reactor.bHeight,  ...
                                         Global.reactor.rHeight,  ...
                                         Global.n2)'; % mesh2           [cm]
@@ -62,7 +63,6 @@ function Global = globalDataFcn()
       Global.carrier.bulkDensity = 1.1;   % particle density        [g/cm3]
       Global.carrier.density     = 0.785; % particle density        [g/cm3]
       Global.carrier.sphericity  = 0.95;  % particle sphericity          []
-      Global.carrier.conversion  = 0.36;  % NiO conversion           []
 % ---------- molar mass for each specie -----------------------------------
       Global.MMASS(1) = 16.0426;      % - CH4                       [g/mol]
       Global.MMASS(2) = 44.0090;      % - CO2                       [g/mol]
