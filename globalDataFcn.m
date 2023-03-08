@@ -14,6 +14,7 @@ function Global = globalDataFcn()
       Global.iterations = Iterations.getInstance();% number of iterations
       Global.n1      = 40;            % mesh points number              [#] 
       Global.n2      = 60;            % mesh points number              [#]
+      Global.nt      = Global.n1 + Global.n2; % total mesh points number[#]
 % ----------| Flow rate and concentration of species |---------------------
 % ----- total feed flow in the reactor's bottom ---------------------------
       Global.QT_in = 1200;            %  condicion_1           [STP ml/min]
@@ -37,7 +38,7 @@ function Global = globalDataFcn()
       Global.reactor.rID_2   = 7.0;% internal diameter of the reactor  [cm]
       Global.reactor.bHeight = 23; % bed height                        [cm]
       Global.reactor.rHeight = 94; % reactor height                    [cm]
-      Global.reactor.rArea   = pi*(Global.reactor.rID/2)^2; % area    [cm2]
+      Global.reactor.rArea1   = pi*(Global.reactor.rID/2)^2; % area    [cm2]
       Global.reactor.z1      = linspace(0,                       ...
                                     Global.reactor.bHeight,      ...
                                     Global.n1)'; % mesh                [cm]
@@ -46,7 +47,7 @@ function Global = globalDataFcn()
                                         Global.n2)'; % mesh2           [cm]
 % ---------- fluid Dynamics -----------------------------------------------
       Global.fDynamics.usg0 = Global.QT_in./...
-                              (Global.reactor.rArea*60.0); 
+                              (Global.reactor.rArea1*60.0); 
                                      % In-Flow rate                  [cm/s]
       Global.fDynamics.usg0_umf = 5; % ratio usg0/umf                    []
       Global.fDynamics.umf  = Global.fDynamics.usg0/... 
@@ -57,7 +58,7 @@ function Global = globalDataFcn()
 % ---------- Carrier Data -------------------------------------------------
       Global.carrier.R       = 8.314472;  % Universal Gas Constant [J/molK] 
       Global.carrier.a0      = 1020000;   % specific surface area   [cm2/g]
-      Global.carrier.C_NiO_o = 0.08;      % NiO concentration    [gNiO/g-c]
+      Global.carrier.C_NiO_o = 0.08;      % NiO concentration    [gNiO/g-c]=== 0.08
       Global.carrier.load    = 300;   % catalyst weight                 [g]
       Global.carrier.dp          = 0.014; % particle diameter          [cm]
       Global.carrier.bulkDensity = 1.1;   % particle density        [g/cm3]

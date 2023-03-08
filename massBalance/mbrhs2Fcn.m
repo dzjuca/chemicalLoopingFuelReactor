@@ -15,19 +15,19 @@ function RH2 = mbrhs2Fcn(alpha,ub,CiBW,CiE,Global,caracter)
     fw      = Global.fDynamics.fw;
     Emf     = Global.fDynamics.Emf; 
     Dcat    = Global.carrier.bulkDensity;
-    zg      = Global.reactor.zg; 
-    xl      = zg(1);
-    xu      = zg(end);
-    n       = Global.n;
-    lambda1 = zeros(n,1);
-    lambda2 = zeros(n,1);
+    z1      = Global.reactor.z1; 
+    xl      = z1(1);
+    xu      = z1(end);
+    n1       = Global.n1;
+    lambda1 = zeros(n1,1);
+    lambda2 = zeros(n1,1);
 % -------------------------------------------------------------------------   
     if     strcmp(caracter,'FGas')
         temporal1 = (alpha+alpha*fw*Emf).*ub;
-             temporal2 = dss012(xl,xu,n,temporal1, 1);
+             temporal2 = dss012(xl,xu,n1,temporal1, 1);
             %temporal2 = dss020(xl,xu,n,temporal1, 1)';
             %temporal2 = dss004(xl,xu,n,temporal1)';
-        for i = 1:n
+        for i = 1:n1
             if      temporal2(i) < 0
                         lambda1(i) = 1;          
                         lambda2(i) = 0;
@@ -43,9 +43,9 @@ function RH2 = mbrhs2Fcn(alpha,ub,CiBW,CiE,Global,caracter)
     elseif strcmp(caracter,'FSolido')
         temporal1 = (1-Emf)*alpha*fw.*ub*Dcat;
             % temporal2 = dss012(xl,xu,n,temporal1, 1);
-              temporal2 = dss020(xl,xu,n,temporal1, 1)';
+              temporal2 = dss020(xl,xu,n1,temporal1, 1)';
             % temporal2 = dss004(xl,xu,n,temporal1)';
-        for i = 1:n
+        for i = 1:n1
             if      temporal2(i) < 0
                         lambda1(i) = 1;
                         lambda2(i) = 0;

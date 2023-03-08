@@ -1,20 +1,19 @@
-function u_t = particleTerminalVelocityFcn()
+function u_t = particleTerminalVelocityFcn(mu_lp_g_m, rho_lp_g_m, Global)
 % -------------------------------------------------------------------------
 
     dp         = Global.carrier.dp; 
     sphericity = Global.carrier.sphericity;
     rho_p      = Global.carrier.bulkDensity;
 % -------------------------------------------------------------------------
-    mu_g_m     = viscosityGasMixFcn(Global, T, Cgas);
-    rho_g_m    = densityGasMixFcn(Cgas, MM);
+
 % -------------------------------------------------------------------------
 
-    tmp_1 = 3.*(mu_g_m.^2);
-    tmp_2 = 4.*g.*rho_g_m.*(rho_p - rho_g_m);
+    tmp_1 = 3.*(mu_lp_g_m.^2);
+    tmp_2 = 4.*g.*rho_lp_g_m.*(rho_p - rho_lp_g_m);
     delta = (tmp_1./tmp_2).^(1/3);
 
-    tmp_3 = 4.*g.*mu_g_m.*(rho_p - rho_g_m);
-    tmp_4 = 3.*(rho_g_m)^2;
+    tmp_3 = 4.*g.*mu_lp_g_m.*(rho_p - rho_lp_g_m);
+    tmp_4 = 3.*(rho_lp_g_m)^2;
     omega = (tmp_3./tmp_4)^(1/3);
 
 % -------------------------------------------------------------------------

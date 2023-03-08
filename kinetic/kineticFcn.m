@@ -12,7 +12,7 @@ function kinetic = kineticFcn(C_gas, C_solid, T, Global, id)
     % ----------------------------| output |-------------------------------
     %     kinetic = reaction rate of each species              [mol/gcat s] ===> revisar este valor                      
 % -------------------------------------------------------------------------
-    index1  = Global.n;
+    index1  = Global.n1;
     kinetic = zeros(index1,1);
     data    = Global.carrier;
 % -------------------------------------------------------------------------
@@ -53,14 +53,6 @@ function kinetic = kineticFcn(C_gas, C_solid, T, Global, id)
             disp('CineticaFcn.m error')
         end 
 % -------------------------------------------------------------------------
-    end
-
-%     if strcmp (id,'Ni')
-% 
-%         disp([kinetic(1),kinetic(20),kinetic(40)])
-% 
-%     end
-
-                        
+    end                     
 % ------------------------------------------------------------------------- 
 end

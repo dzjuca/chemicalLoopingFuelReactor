@@ -14,21 +14,21 @@ function [KWE] = KWEFcn(db, Global)
 
     umf    = Global.fDynamics.umf; 
     usg0   = Global.fDynamics.usg0; 
-    n      = Global.n;
+    n1      = Global.n1;
 
 % -------------------------------------------------------------------------
 
     factor = usg0/umf;
-    KWE    = zeros(n,1);
+    KWE    = zeros(n1,1);
     
 % -------------------------------------------------------------------------     
     if     factor <= 3
-        for j = 1:n
+        for j = 1:n1
             KWE(j) = 100*0.075*(usg0-umf)/(umf*db(j));
             if db(j) == 0, KWE(j) = 0; end
         end                            
     elseif factor > 3
-        for j = 1:n
+        for j = 1:n1
             KWE(j) = (100*0.15/db(j));
             if db(j) == 0, KWE(j) = 0; end
         end

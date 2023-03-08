@@ -1,6 +1,7 @@
-function u_g0_lp = superficialGasVelocityFreeboardFcn(C_gs_dp, Global)
-% -------------------------------------------------------------------------
+function [f1g, f2g, f3g, f4g, f5g, f6g] = bc_lp_g_Fcn(f1g, f2g, f3g, ...
+                                            f4g, f5g, f6g, C_gs_dp, Global)
 
+% -------------------------------------------------------------------------
 
     Emf = Global.fDynamics.Emf;
     fw  = Global.fDynamics.fw;
@@ -18,11 +19,15 @@ function u_g0_lp = superficialGasVelocityFreeboardFcn(C_gs_dp, Global)
     F_ge_dp_i = C_ge_dp_i.*ue.*A.*(1 - alpha - alpha.*fw).*Emf;
     F_g_dp_i  = F_gb_dp_i + F_ge_dp_i;
     Q_g_dp_i  = sum(F_g_dp_i,2).*22.4.*1000;
-
-    u_g0_i    = Q_g_dp_i./A;
+    C_g_dp_i  = F_g_dp_i./Q_g_dp_i;
 % -------------------------------------------------------------------------
 
-    u_g0_lp   = u_g0_i(n1);
-
+    f1g(1) = C_g_dp_i(n1,1);
+    f2g(2) = C_g_dp_i(n1,2);
+    f3g(3) = C_g_dp_i(n1,3);
+    f4g(4) = C_g_dp_i(n1,4);
+    f5g(5) = C_g_dp_i(n1,5);
+    f6g(6) = C_g_dp_i(n1,6);
+    
 % -------------------------------------------------------------------------
 end

@@ -6,10 +6,10 @@ function graphsMfgAllSpeciesFcn(t, u, Global)
        %  ebrhs1 = right-hand side term-1                         [J/s cm3]
 % -------------------------------------------------------------------------
 
-    A = Global.reactor.rArea;
+    A = Global.reactor.rArea1;
     [ub,db,us,ue,alpha] = ubFcn(Global);  
     m      = length(t);
-    n      = Global.n;
+    n1      = Global.n1;
 
 % -------------------------------------------------------------------------
 
@@ -18,9 +18,9 @@ function graphsMfgAllSpeciesFcn(t, u, Global)
     thor = t/3600;
 
 % -------------------------------------------------------------------------
-    zg     = Global.reactor.zg;
+    z1     = Global.reactor.z1;
     index1 = length(t);    % tiempo
-    index2 = Global.n;     % espacio
+    index2 = Global.n1;     % espacio
     index3 = Global.gen;   % # de compuestos
 % -------------------------------------------------------------------------
 
@@ -103,11 +103,11 @@ function graphsMfgAllSpeciesFcn(t, u, Global)
     % ---------------------------------------------------------------------
     hold on
 
-        plot(tmin,x1(:,n)','ko-','MarkerSize',MZ1); % CH4
-        plot(tmin,x2(:,n)','ks-','MarkerSize',MZ1); % CO2
-        plot(tmin,x3(:,n)','kp-','MarkerSize',MZ1); % CO
-        plot(tmin,x4(:,n)','kd-','MarkerSize',MZ1); % H2
-        plot(tmin,x5(:,n)','k*-','MarkerSize',MZ1); % H2O
+        plot(tmin,x1(:,n1)','ko-','MarkerSize',MZ1); % CH4
+        plot(tmin,x2(:,n1)','ks-','MarkerSize',MZ1); % CO2
+        plot(tmin,x3(:,n1)','kp-','MarkerSize',MZ1); % CO
+        plot(tmin,x4(:,n1)','kd-','MarkerSize',MZ1); % H2
+        plot(tmin,x5(:,n1)','k*-','MarkerSize',MZ1); % H2O
 
         ylabel(TAG1{3},'FontSize',YLFZ,'interpreter','Latex')
         ylim([0 0.6])
@@ -150,11 +150,11 @@ function graphsMfgAllSpeciesFcn(t, u, Global)
 
     hold on
 
-        plot(zg,x1(m,:)','ko-','MarkerSize',MZ1);
-        plot(zg,x2(m,:)','ks-','MarkerSize',MZ1);
-        plot(zg,x3(m,:)','kp-','MarkerSize',MZ1);
-        plot(zg,x4(m,:)','kd-','MarkerSize',MZ1);
-        plot(zg,x5(m,:)','k*-','MarkerSize',MZ1);
+        plot(z1,x1(m,:)','ko-','MarkerSize',MZ1);
+        plot(z1,x2(m,:)','ks-','MarkerSize',MZ1);
+        plot(z1,x3(m,:)','kp-','MarkerSize',MZ1);
+        plot(z1,x4(m,:)','kd-','MarkerSize',MZ1);
+        plot(z1,x5(m,:)','k*-','MarkerSize',MZ1);
 
         ley2 = {'$C{H_4}$','$C{O_2}$','$CO$','${H_2}$','${H_2}O$'};
 
@@ -170,7 +170,7 @@ function graphsMfgAllSpeciesFcn(t, u, Global)
 
         ylim([0 0.6])
 
-        max2 = max(zg); 
+        max2 = max(z1); 
         xlim([0 max2])
 
     hold off

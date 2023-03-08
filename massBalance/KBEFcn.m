@@ -32,7 +32,7 @@ function KBE = KBEFcn( db, ub ,CTBW ,Tbed, Global ,caracter2 )
 % -------------------------------------------------------------------------
 
     index1 = Global.gen;     %                          number of compounds
-    index2 = Global.n;       %                 number of points in the mesh
+    index2 = Global.n1;      %                 number of points in the mesh
     kbc    = zeros(index2,1);
     kce    = zeros(index2,1);
     KBE    = zeros(index2,1);

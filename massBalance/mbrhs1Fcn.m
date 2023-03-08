@@ -15,30 +15,30 @@ function RH1 = mbrhs1Fcn(alpha,ubes,Ci,Global,caracter)
     fw   = Global.fDynamics.fw;
     Emf  = Global.fDynamics.Emf; 
     Dcat = Global.carrier.bulkDensity;
-    zg   = Global.reactor.zg;  
-    xl   = zg(1);
-    xu   = zg(end);
-    n    = Global.n;
+    z1   = Global.reactor.z1;  
+    xl   = z1(1);
+    xu   = z1(end);
+    n1    = Global.n1;
 % -------------------------------------------------------------------------
     if     strcmp(caracter,'FGBurbuja')
             temporal = (alpha+alpha*fw*Emf).*ubes.*Ci;
-                 RH1 = dss012(xl,xu,n,temporal, 1);
+                 RH1 = dss012(xl,xu,n1,temporal, 1);
                 %RH1 = dss020(xl,xu,n,temporal, 1)';
                 %RH1 = dss004(xl,xu,n,temporal)';
     elseif strcmp(caracter,'FGEmulsion')
             temporal = (1-alpha-alpha*fw)*Emf.*ubes.*Ci;
-                 RH1 = dss012(xl,xu,n,temporal, 1);
+                 RH1 = dss012(xl,xu,n1,temporal, 1);
                 %RH1 = dss020(xl,xu,n,temporal, 1)';
                 %RH1 = dss004(xl,xu,n,temporal)';
     elseif strcmp(caracter,'FSEstela')
             temporal = Dcat*(1-Emf)*alpha*fw.*ubes.*Ci;
                  %RH1 = dss012(xl,xu,n,temporal, 1);
-                  RH1 = dss020(xl,xu,n,temporal, 1)';
+                  RH1 = dss020(xl,xu,n1,temporal, 1)';
                  %RH1 = dss004(xl,xu,n,temporal)';
     elseif strcmp(caracter,'FSEmulsion')
             temporal = (1-alpha-alpha*fw)*(1-Emf)*Dcat.*ubes.*Ci;
                  %RH1 = dss012(xl,xu,n,temporal, -1);
-                 RH1 = dss020(xl,xu,n,temporal, -1)';
+                 RH1 = dss020(xl,xu,n1,temporal, -1)';
                  %RH1 = dss004(xl,xu,n,temporal)';
     else
             disp('Error - The caracter in the mbrhs1Fcn.m is not correct')
