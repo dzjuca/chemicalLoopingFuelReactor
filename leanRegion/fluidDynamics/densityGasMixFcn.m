@@ -1,21 +1,19 @@
-function densityGasMix = densityGasMixFcn(Cgas, MM )
+function densityGasMix = densityGasMixFcn(Cgas, T, Global)
 
-    [m, n]   = size(Cgas);
-    fld      = fieldnames(MM);
-    mMolar   = zeros(1,n);
+    MM     = Global.MMG;
+    [~, n] = size(Cgas);
+    fld    = fieldnames(MM);
+    mMolar = zeros(1,n);
 
     for i = 1:n
         mMolar(i) = MM.(fld{i});
     end
 
-    densityGas_i = zeros(m,n);
+    % ----
+    P   = Global.P_atm;
+    R   = Global.R_atm;
+    y_i = molarFractionFcn(Cgas);
 
-    for i = 1:m
-        for j = 1:n
-            densityGas_i(i,j) = Cgas(i,j) * MM.(fld{j});
-        end
-    end
-
-    densityGasMix = sum(densityGas_i,2);
+    densityGasMix = (P.*sum(y_i.* mMolar,2)./(R.*T))./1000; % ==== g/cm3
 
 end

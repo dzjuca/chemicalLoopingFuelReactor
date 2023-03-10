@@ -27,7 +27,7 @@ function viscosityGasMix = viscosityGasMixFcn(Global, T, Cgas )
             Pc(1,l)  = Global.Pcr.(flds{l});
             Vc(1,l)  = Global.Vc.(flds{l});
             mu(1,l)  = Global.Mu.(flds{l});
-            M(1,l)   = Global.MM.(flds{l});
+            M(1,l)   = Global.MMG.(flds{l});
         end
     % -------------------------------------------------------------------------
         yi_gas  = molarFractionFcn(Cgas);
@@ -48,6 +48,9 @@ function viscosityGasMix = viscosityGasMixFcn(Global, T, Cgas )
             mum_gas(:,i) =  yi_gas(:,i).*mui_gas./sum(tmp_1, 2);
             
         end
+
+        mum_gas(isinf(mum_gas)) = 0.0;
+        mum_gas(isnan(mum_gas)) = 0.0;
     
         viscosityGasMix = sum(mum_gas, 2);
     % -------------------------------------------------------------------------
