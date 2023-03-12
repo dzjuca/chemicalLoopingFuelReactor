@@ -14,7 +14,7 @@
     u0   = initialConditions(Global);
 % ---------- time simulation (s) ------------------------------------------
     t0   = 0.0; 
-    tf   = 10;
+    tf   = 0.75*60;
     tout = linspace(t0,tf,100)';
 % ---------- Implicit (sparse stiff) integration --------------------------
     reltol   = 1.0e-6; abstol = 1.0e-6;  
@@ -25,4 +25,6 @@
     [t,u]    = ode15s(pdeModel,tout,u0,options);  
 % -----
     graphsMfgAllSpeciesFcn(t, u, Global)
+%% ---
+    graphsMf_g_lp_Fcn(t, u, Global)
 % ---------------------------| End Program |-------------------------------

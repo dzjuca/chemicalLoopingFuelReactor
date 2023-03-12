@@ -44,6 +44,6 @@ function lr_mbrhs3 = lr_mbrhs3Fcn(C_gs_dp, C_gs_lp, T_lp, Global, id1, id2)
         lr_mbrhs3 = 0;
 
     end
-
+   % lr_mbrhs3 = lr_mbrhs3.*0;
 % -------------------------------------------------------------------------
 end

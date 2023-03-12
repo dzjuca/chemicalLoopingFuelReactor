@@ -62,7 +62,7 @@ function Global = globalDataFcn()
 % ---------- Carrier Data -------------------------------------------------
       Global.carrier.R       = 8.314472;  % Universal Gas Constant [J/molK] 
       Global.carrier.a0      = 1020000;   % specific surface area   [cm2/g]
-      Global.carrier.C_NiO_o = 0.08;      % NiO concentration    [gNiO/g-c]=== 0.08
+      Global.carrier.C_NiO_o = 0.14;      % NiO concentration    [gNiO/g-c]=== 0.08
       Global.carrier.load    = 300;   % catalyst weight                 [g]
       Global.carrier.dp          = 0.014; % particle diameter          [cm]
       Global.carrier.bulkDensity = 1.1;   % particle density        [g/cm3]
