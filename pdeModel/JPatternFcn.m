@@ -14,7 +14,7 @@ function S = JPatternFcn(Global)
   index2  = Global.n2;
   tbase   = 0;
 
-  for i = 1:(index1*Num_esp_1 + index2*Num_esp_2)
+  for i = 1:(index1*Num_esp_1 + index2*Num_esp_2*0)
     ybase(i) = 0.5;
   end
   ybase = ybase';
