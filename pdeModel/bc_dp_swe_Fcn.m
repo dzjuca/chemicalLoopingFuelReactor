@@ -1,4 +1,4 @@
-function [u7w, u8w, u9w, u7e, u8e, u9e] = bc_dp_swe_Fcn(u7w, u8w, u9w, ... 
+function [solid, C_s_w, C_s_e] = bc_dp_swe_Fcn(u7w, u8w, u9w, ... 
                                                     u7e, u8e, u9e, Global)
 
     index1 = Global.n1;
@@ -10,5 +10,13 @@ function [u7w, u8w, u9w, u7e, u8e, u9e] = bc_dp_swe_Fcn(u7w, u8w, u9w, ...
     u7e(index1) = u7w(index1); 
     u8e(index1) = u8w(index1);
     u9e(index1) = u9w(index1);
+
+    wake.u7w = u7w; wake.u8w = u8w; wake.u9w = u9w;
+    emulsion.u7e = u7e; emulsion.u8e = u8e; emulsion.u9e = u9e;
+
+    solid.wake = wake; solid.emulsion = emulsion;
+
+    C_s_w = [u7w,u8w,u9w];
+    C_s_e = [u7e,u8e,u9e];
 
 end
