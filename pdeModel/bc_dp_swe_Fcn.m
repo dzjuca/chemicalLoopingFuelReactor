@@ -1,12 +1,18 @@
-function [solid, C_s_w, C_s_e] = bc_dp_swe_Fcn(u7w, u8w, u9w, ... 
-                                                    u7e, u8e, u9e, Global)
+function [solid, C_s_w, C_s_e] = bc_dp_swe_Fcn(u, Global)
 
     index1 = Global.n1;
-% % ---------- z = 0 solid - wake & emulsion phases -------------------------
+    id_s_w = 'solid_wake';    
+    id_s_e = 'solid_emulsion';
+
+% ---------- solid - wake phase -------------------------------------------
+    [u7w, u8w, u9w] = assignValuesFcn(u, Global, id_s_w);
+% ---------- solid - emulsion phase ---------------------------------------
+    [u7e, u8e, u9e] = assignValuesFcn(u, Global, id_s_e);
+% ---------- z = 0 solid - wake & emulsion phases -------------------------
     u7w(1) = u7e(1); 
     u8w(1) = u8e(1); 
     u9w(1) = u9e(1);
-% % ---------- z = Zg solid - wake & emulsion phases ------------------------
+% ---------- z = Zg solid - wake & emulsion phases ------------------------
     u7e(index1) = u7w(index1); 
     u8e(index1) = u8w(index1);
     u9e(index1) = u9w(index1);
@@ -18,5 +24,5 @@ function [solid, C_s_w, C_s_e] = bc_dp_swe_Fcn(u7w, u8w, u9w, ...
 
     C_s_w = [u7w,u8w,u9w];
     C_s_e = [u7e,u8e,u9e];
-
+% -------------------------------------------------------------------------
 end

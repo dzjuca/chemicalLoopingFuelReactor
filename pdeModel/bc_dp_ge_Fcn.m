@@ -1,6 +1,9 @@
-function [emulsion, C_g_e] = bc_dp_ge_Fcn(u1e, u2e, u3e, ... 
-                                                u4e, u5e, u6e, Global)
+function [emulsion, C_g_e] = bc_dp_ge_Fcn(u, Global)
 % ---------- z = 0 gas - emulsion phase -----------------------------------
+
+% ---------- gas - emulsion phase -----------------------------------------
+    id_g_e  = 'gas_emulsion';
+    [u1e, u2e, u3e, u4e, u5e, u6e] = assignValuesFcn(u, Global, id_g_e);
 
     u1e(1) = Global.CH4in; u2e(1) = 0.000; u3e(1) = 0.000;
     u4e(1) = 0.000;        u5e(1) = 0.000; u6e(1) = Global.N2in;
