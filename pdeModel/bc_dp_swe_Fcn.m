@@ -1,5 +1,5 @@
 function [solid, C_s_w, C_s_e] = bc_dp_swe_Fcn(u, Global)
-
+    
     index1 = Global.n1;
     id_s_w = 'solid_wake';    
     id_s_e = 'solid_emulsion';

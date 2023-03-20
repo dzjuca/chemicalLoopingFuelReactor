@@ -1,4 +1,4 @@
-function ut_dp_mb = denseMassBalanceFcn(u, Tbed, Global)
+function mb_dp = denseMassBalanceFcn(u, Tbed, Global)
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 % --------------------| constants values |---------------------------------
@@ -70,8 +70,9 @@ u9et = massBalanceFcn(u9w,u9e,C_gs_dp,Tbed,alpha,[ub,us],db,Global,id_1,id_2,'C'
     u8et(index1) = u8wt(index1);
     u9et(index1) = u9wt(index1);
 % --------------------| Temporal Variation Vector dudt |-------------------
-    ut_dp_mb = [u1bt; u2bt; u3bt; u4bt; u5bt; u6bt; ...
+    mb_dp.ut = [u1bt; u2bt; u3bt; u4bt; u5bt; u6bt; ...
                 u1et; u2et; u3et; u4et; u5et; u6et; ...
                 u7wt; u8wt; u9wt; u7et; u8et; u9et];
+    mb_dp.C_gs_dp = C_gs_dp;
 % -------------------------------------------------------------------------
 end

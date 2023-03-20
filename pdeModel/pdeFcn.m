@@ -11,22 +11,23 @@ function ut = pdeFcn(t,u,Global)
     % ---------------------------------------------------------------------
 % --------------------| constants values |---------------------------------
 
-    ncall   = Global.iterations;
-    Tbed  (1:Global.n1,1) = Global.Tbed;
-    % Tbed_2(1:Global.n2,1) = Global.Tbed;
-    % id_g_f  = 'gas_freeboard'; id_s_f  = 'solid_freeboard';
+    ncall                 = Global.iterations;
+    Tbed_dp  (1:Global.n1,1) = Global.Tbed;
+    Tbed_lp(1:Global.n2,1) = Global.Tbed;
+
 % --------------------| Variables Initial Configuration |------------------
 % ---------- non-negative values check ------------------------------------
     u(u < 0) = 0;
 % --------------------| Fluidized Bed |------------------------------------ 
-% -----
-    ut_dp_mb = denseMassBalanceFcn(u, Tbed, Global);
-% ------ 
-% --------------------| Mass Balance - Gas   - Freeboard Phase |-----------
-% --------------------| Mass Balance - Solid - Freeboard Phase |-----------
-
+% -------------------------------------------------------------------------
+    mb_dp    = denseMassBalanceFcn(u, Tbed_dp, Global);
+    ut_dp_mb = mb_dp.ut;  
+    C_gs_dp  = mb_dp.C_gs_dp;  
+% -------------------------------------------------------------------------
+    mb_lp    = leanMassBalanceFcn(u, C_gs_dp, Tbed_lp, Global);
+    ut_lp_mb = mb_lp.ut;  
 % --------------------| Temporal Variation Vector dudt |-------------------
-    ut = ut_dp_mb;
+    ut = [ut_dp_mb; ut_lp_mb];
 % --------------------| Number Calls To pdeFcn |---------------------------
     disp([ncall.getNcall, t]);
     ncall.incrementNcall();
