@@ -25,8 +25,10 @@ function lr_mbrhs2 =  lr_mbrhs2Fcn(Ci, Global)
 
     D_ax      = axialDispersionCoefficientFcn(Global);
     dCi_dz    = dss012(xl,xu,n2,Ci, 1);
+    %dCi_dz    = dss020(xl,xu,n2,Ci, 1)';
     tmp_1     = D_ax.*dCi_dz;
     lr_mbrhs2 = dss012(xl,xu,n2,tmp_1, 1);
+    %lr_mbrhs2 = dss020(xl,xu,n2,tmp_1, 1)';
 
 % -------------------------------------------------------------------------
 end

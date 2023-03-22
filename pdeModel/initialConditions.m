@@ -11,6 +11,7 @@ function u = initialConditions(Global)
     n2       = Global.n2;
     N2in     = Global.N2in;
     C_NiO_o  = Global.carrier.C_NiO_o;
+    CH4in    = Global.CH4in;
 % ----------------------------| dense phase |------------------------------
 % ---------- gas species - Bubble & Wake phases----------------------------
     u1b = zeros(n1,1);   u2b = zeros(n1,1); u3b = zeros(n1,1);   
@@ -31,7 +32,7 @@ function u = initialConditions(Global)
 % -------------------------------------------------------------------------
 % ----------------------------| dense phase |------------------------------
 % ---------- u1 = CH4 bubble & emulsion  ----------------------------------
-    u1b(:,1) = 0.00;        u1e(:,1) = 0.00;     
+    u1b(:,1) = CH4in;        u1e(:,1) = CH4in;     
 % ---------- u2 = CO2 bubble & emulsion -----------------------------------
     u2b(:,1) = 0.00;        u2e(:,1) = 0.00;     
 % ---------- u3 = CO bubble ----------------------------------------------- 

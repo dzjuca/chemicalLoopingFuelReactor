@@ -35,10 +35,14 @@ function a = decayFactorFcn(u_g0, rho_g, mu_g, u_t, Global, id)
         g     = Global.g;
 
         Ar  = ((dp.^3).*rho_g.*(rho_s - rho_g).*g)./(mu_g.^2);
+        Ar(isnan(Ar)) = 0;
+        Ar(isinf(Ar)) = 0;
         a_m = 1 + 0.5.*(Ar.^(1/3));
         a   = a_m./100;
 
     end
 
+    a(isnan(a)) = 0;
+    a(isinf(a)) = 0;
 
 end

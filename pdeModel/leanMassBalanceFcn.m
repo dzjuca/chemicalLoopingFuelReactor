@@ -1,4 +1,4 @@
-function mb_dp = leanMassBalanceFcn(u, C_gs_dp, Tbed, Global)    
+function mb_lp = leanMassBalanceFcn(u, C_gs_dp, Tbed, Global)    
 % -------------------------------------------------------------------------        
 % --------------------| Boundary Conditions Lean Phase |-------------------
     [gas, C_g]   = bc_lp_g_Fcn(u, C_gs_dp, Global);
@@ -45,9 +45,15 @@ function mb_dp = leanMassBalanceFcn(u, C_gs_dp, Tbed, Global)
     f3st = (- lr_mbrhs1Fcn(f3s, C_gs_lp, Tbed, Global, 's_lp')        ...
             + lr_mbrhs3Fcn(C_gs_lp, Tbed, Global, 's_lp', 'C_lp'));
 % -------------------------------------------------------------------------
+% --------------------| Boundary Conditions 2 |----------------------------
+% ---------- z2 = z1 gas --------------------------------------------------
 
-    mb_dp.ut = [f1gt; f2gt; f3gt; f4gt; f5gt; f6gt; f1st; f2st; f3st];
-    mb_dp.C_gs_lp = C_gs_lp;
+        f1gt(1) = 0; f2gt(1) = 0; f3gt(1) = 0; 
+        f4gt(1) = 0; f5gt(1) = 0; f6gt(1) = 0;
+        %f1st(1) = 0; f2st(1) = 0; f3st(1) = 0;
+
+        mb_lp.ut = [f1gt; f2gt; f3gt; f4gt; f5gt; f6gt; f1st; f2st; f3st];
+        mb_lp.C_gs_lp = C_gs_lp;
     
 % -------------------------------------------------------------------------
 end
