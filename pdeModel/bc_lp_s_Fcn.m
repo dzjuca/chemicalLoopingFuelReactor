@@ -14,12 +14,19 @@ function  [solid, C_s] = bc_lp_s_Fcn(u, C_gs_dp, Global)
 
     [f1s, f2s, f3s] = assignValuesFcn(u, Global, id_s_f);
 
-    C_s_w  = (C_gs_dp.C_s_w).*alpha.*fw.*(1 - Emf);
-    C_s_e  = (C_gs_dp.C_s_e).*(1 - alpha - alpha.*fw).*(1 - Emf);
-    C_s_we = C_s_w + C_s_e;
+    C_s_w  = C_gs_dp.C_s_w;
+    C_s_e  = C_gs_dp.C_s_e;
+    C_s_we = (C_s_w + C_s_e)./2;
     f1s(1) = C_s_we(n1,1);
     f2s(1) = C_s_we(n1,2);
     f3s(1) = C_s_we(n1,3);
+
+
+%     C_s_w  = C_gs_dp.C_s_w;
+% 
+%     f1s(1) = C_s_w(n1,1);
+%     f2s(1) = C_s_w(n1,2);
+%     f3s(1) = C_s_w(n1,3);
 
 % -----------------------------------------------------------------
 

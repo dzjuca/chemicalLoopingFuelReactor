@@ -5,10 +5,10 @@ function graphs_c_s_Fcn(t, u_total, Global)
        % ----------------------------| output |----------------------------
 % -------------------------------------------------------------------------
 
-       A   = Global.reactor.rArea1;
        Emf = Global.fDynamics.Emf;
        fw  = Global.fDynamics.fw;
-             [ub,db,us,ue,alpha]= ubFcn(Global);
+             [ub,db,us,ue,alpha_1]= ubFcn(Global);
+       alpha = alpha_1';
        m   = length(t);
        n1  = Global.n1;
        n2  = Global.n2;
@@ -27,6 +27,34 @@ function graphs_c_s_Fcn(t, u_total, Global)
        index2 = Global.n2;   
 % -------------------------------------------------------------------------
 
+       u7w = zeros(m,index1); u8w = zeros(m,index1); u9w = zeros(m,index1); 
+       u7e = zeros(m,index1); u8e = zeros(m,index1); u9e = zeros(m,index1);
+
+% -------------------------------------------------------------------------
+
+       for j=1:m 
+              for i=1:index1, u7w(j,i)=u1(j,i+12*index1);    end
+              for i=1:index1, u8w(j,i)=u1(j,i+13*index1);    end
+              for i=1:index1, u9w(j,i)=u1(j,i+14*index1);    end
+              for i=1:index1, u7e(j,i)=u1(j,i+15*index1);    end
+              for i=1:index1, u8e(j,i)=u1(j,i+16*index1);    end
+              for i=1:index1, u9e(j,i)=u1(j,i+17*index1);    end
+       end
+% -------------------------------------------------------------------------
+% 
+%         dp_s1 = u7w.*alpha.*fw.*(1 - Emf) +                ...
+%                 u7e.*(1 - alpha - alpha.*fw).*(1 - Emf);
+%         dp_s2 = u8w.*alpha.*fw.*(1 - Emf) +                ... 
+%                 u8e.*(1 - alpha - alpha.*fw).*(1 - Emf);
+%         dp_s3 = u9w.*alpha.*fw.*(1 - Emf) +                ... 
+%                 u9e.*(1 - alpha - alpha.*fw).*(1 - Emf);
+
+    dp_s1 = (u7w + u7e)./2; 
+    dp_s2 = (u8w + u8e)./2;
+    dp_s3 = (u9w + u9e)./2;
+                            
+% -------------------------------------------------------------------------
+
        f1s = zeros(m, index2); 
        f2s = zeros(m, index2); 
        f3s = zeros(m, index2);
@@ -39,6 +67,10 @@ function graphs_c_s_Fcn(t, u_total, Global)
               for i=1:index2, f3s(j,i)=u2(j,i+8*index2);     end
        end
 
+% -------------------------------------------------------------------------
+       f1s(m,1) = dp_s1(m,n1); 
+       f2s(m,1) = dp_s2(m,n1); 
+       f3s(m,1) = dp_s3(m,n1); 
 % -------------------------------------------------------------------------
 
        TAG1 = {'$C_{i}\left( \frac{g}{g_{carrier}} \right)$'}; 
@@ -72,6 +104,9 @@ function graphs_c_s_Fcn(t, u_total, Global)
               set(fig1, 'Color', 'w') 
 % -------------------------------------------------------------------------
        hold on
+              plot(tmin,dp_s1(:,n1)','ko-','MarkerSize',MZ1); % NiO
+              plot(tmin,dp_s2(:,n1)','ks-','MarkerSize',MZ1); % Ni
+              plot(tmin,dp_s3(:,n1)','kp-','MarkerSize',MZ1); % C
 
               plot(tmin,f1s(:,n2)','ko-','MarkerSize',MZ1); % NiO
               plot(tmin,f2s(:,n2)','ks-','MarkerSize',MZ1); % Ni
@@ -116,6 +151,9 @@ function graphs_c_s_Fcn(t, u_total, Global)
        set(fig2, 'Color', 'w') 
 
        hold on
+              plot(z1,dp_s1(m,:)','ko-','MarkerSize',MZ1);
+              plot(z1,dp_s2(m,:)','ks-','MarkerSize',MZ1);
+              plot(z1,dp_s3(m,:)','kp-','MarkerSize',MZ1);
 
               plot(z2,f1s(m,:)','ko-','MarkerSize',MZ1);
               plot(z2,f2s(m,:)','ks-','MarkerSize',MZ1);
